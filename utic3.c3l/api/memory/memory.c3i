@@ -1,0 +1,4 @@
+module utic3::mem;
+
+// extern fn int some_library_function();
+extern fn void print() @cname("utic3_mem_print");

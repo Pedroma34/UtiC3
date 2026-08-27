@@ -1,0 +1,13 @@
+# C3 output
+build/
+out/
+
+# Compiled libraries copied into the C3 package
+/utic3.c3l/linked-libs/*
+!/utic3.c3l/linked-libs/.gitkeep
+
+# Editor temporary files
+*.swp
+*.swo
+*~
+.cache/

@@ -1,0 +1,33 @@
+{
+  "langrev": "1",
+  "warnings": [ "no-unused" ],
+  "dependency-search-paths": [ "lib" ],
+  "dependencies": [ ],
+  "authors": [ "Pedro de Castro Sarmento <pedroma-guild@hotmail.com>" ],
+  "version": "0.1.0",
+  // Sources compiled for all targets.
+  "sources": [ "src/**" ],
+  "test-sources": [ "test/**" ],
+  // C sources if the project also compiles C sources
+  // relative to the project file.
+  // "c-sources": [ "csource/**" ],
+  // Include directories for C sources relative to the project file.
+  // "c-include-dirs": [ "csource/include" ],
+  "output": "build",
+  // "target": "windows-x64",
+  // Targets.
+  "targets": {
+    "UtiC3": {
+      "type": "static-lib",
+      "opt": "O3"
+    },
+
+    "Testbed": {
+        "type": "executable",
+        "sources": ["testbed/**"],
+        "opt": "O0",
+        "debug-info": "full"
+    },
+  },
+
+}

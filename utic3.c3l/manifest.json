@@ -1,0 +1,17 @@
+{
+  "provides" : "utic3",
+  "sources" : [ "api/**" ],
+  "linklib-dir" : "linked-libs",
+  "targets" : {
+    "linux-x64" : {
+      "link-args" : [],
+      "dependencies" : [],
+      "linked-libraries" : ["utic3"]
+    },
+    "windows-x64" : {
+      "link-args" : [],
+      "dependencies" : [],
+      "linked-libraries" : ["utic3"]
+    },
+  }
+}
