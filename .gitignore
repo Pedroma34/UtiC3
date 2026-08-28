@@ -1,3 +1,9 @@
+# Visual Studio
+.vs/
+.vscode/
+
+# Project-level VS Code configuration is committed in .vscode/.
+
 # C3 output
 build/
 out/
