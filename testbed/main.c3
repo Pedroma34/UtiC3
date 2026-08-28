@@ -10,6 +10,6 @@ fn int main() {
     }
     *i = 2;
     io::printfn("Allocated successfully: %d", *i);
-    defer(std_allocator.free(int, i));
+    defer(std_allocator.free(i));
     return 0;
 }

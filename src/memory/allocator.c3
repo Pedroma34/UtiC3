@@ -50,11 +50,14 @@ macro Allocator.alloc(&self, $Type) {
 
 <*
     @param [&in] self : "allocator cannot be null"
+    @require block != null : "block must not be null"
+    @require $defined(*block) : "block must be a typed pointer bro"
 *>
-macro Allocator.free(&self, $Type, void* block) {
-    self.free_raw(block, $Type::size, $Type::alignment);
+macro Allocator.free(&self, block) {
+    var $Type = $Typeof(*block);
+    self.free_raw((void*)block, $Type::size, $Type::alignment);
 }
 
-fn bool power_of_two(usz value) @private {
+fn bool power_of_two(usz value) {
     return value != 0 && (value & (value - 1)) == 0;
 }
