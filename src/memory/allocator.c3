@@ -26,6 +26,7 @@ fn Allocator allocator_init(AllocFn alloc_callback, FreeFn free_callback, void* 
     @require self.callback_alloc != null : "allocator has no allocation callback"
     @require size > 0, alignment > 0
     @require power_of_two(alignment) : "alignment must be power of two"
+    @ensure return != null
 *>
 fn void* Allocator.alloc_raw(Allocator* self, usz size, usz alignment) {
    return self.callback_alloc(size, alignment, self.user); 
@@ -50,12 +51,29 @@ macro Allocator.alloc(&self, $Type) {
 
 <*
     @param [&in] self : "allocator cannot be null"
-    @require block != null : "block must not be null"
+    @require count > 0
+*>
+macro Allocator.alloc_array(&self, $Type, usz count) {
+    $Type* buffer = ($Type*)self.alloc_raw($Type::size * count, $Type::alignment);
+    return buffer[:count];
+}
+
+<*
+    @param [&in] self : "allocator cannot be null"
     @require $defined(*block) : "block must be a typed pointer bro"
 *>
 macro Allocator.free(&self, block) {
     var $Type = $Typeof(*block);
     self.free_raw((void*)block, $Type::size, $Type::alignment);
+}
+
+<*
+    @param [&in] self
+    @require @kindof(array) == TypeKind.SLICE : "must be a slice"
+    @require array.len > 0 : "slice cannot be empty"
+*>
+macro Allocator.free_array(&self, array) {
+    self.free_raw((void*)array.ptr, $Typeof(array[0])::size * array.len, $Typeof(array[0])::alignment);
 }
 
 fn bool power_of_two(usz value) {

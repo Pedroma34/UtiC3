@@ -11,5 +11,13 @@ fn int main() {
 	}
 	*i = 2;
 	io::printfn("Allocated successfully: %d", *i);
+
+    io::printfn("Allocating array...");
+    int[] array = std_allocator.alloc_array(int, 10);
+    defer(std_allocator.free_array(array));
+    io::printfn("Array allocated");
+    String name = $Typeof(array)::name;
+    usz size = $Typeof(array[0])::size;
+    io::printfn("Array len: %d | Name: %s | Size: %d", array.len, name, size);
 	return 0;
 }
