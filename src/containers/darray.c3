@@ -27,3 +27,22 @@ fn void DArray.destroy(DArray* self) {
     self.buffer = {};
     self.size = 0;
 }
+
+<*
+    @param [&inout] self : "darray must not be null"
+    @ensure self.buffer.len >= self.size
+*>
+fn void DArray.push_value(DArray* self, Type value) {
+   if(self.size == self.buffer.len) {
+       resize(self);
+   }
+   self.buffer[self.size] = value;
+   self.size++;
+}
+
+fn void resize(DArray* darray) @local {
+    usz new_capacity = darray.buffer.len * 2;
+    Type[] new_array = darray.backing_allocator.alloc_array(Type, new_capacity);
+    darray.backing_allocator.free_array(darray.buffer);
+    darray.buffer = new_array;
+}
