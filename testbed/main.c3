@@ -58,8 +58,13 @@ fn int main() {
     
     io::printfn("Pushing elements to darray..");
     for(usz index = 0; index < 6; index++) {
-        d_array.push_value((int)index + 1);
+        d_array.push_value(((int)index + 1) * 2);
         io::printfn("Element pushed.");
+    }
+
+    io::printfn("Printing each element...");
+    for(usz index = 0; index < d_array.size; index++) {
+        io::printfn("Value: %d", d_array.buffer[index]);
     }
 
     // >>>> End of testing allocator and container stuff <<<< //

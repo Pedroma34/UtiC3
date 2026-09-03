@@ -43,6 +43,9 @@ fn void DArray.push_value(DArray* self, Type value) {
 fn void resize(DArray* darray) @local {
     usz new_capacity = darray.buffer.len * 2;
     Type[] new_array = darray.backing_allocator.alloc_array(Type, new_capacity);
+    for(usz i = 0; i < darray.size; i++) {
+        new_array[i] = darray.buffer[i];
+    }
     darray.backing_allocator.free_array(darray.buffer);
     darray.buffer = new_array;
 }
